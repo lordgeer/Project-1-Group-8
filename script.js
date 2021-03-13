@@ -14,10 +14,11 @@ btnEl.addEventListener("click", function(event) {
     .then(function (data) {
         console.log(data);
 });
-
+var instance = M.FormSelect.getInstance(elem);
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, options);
+    // var instances = M.Modal.init(elems, options);
   });
-
+  
 })
+instance.getSelectedValues();
