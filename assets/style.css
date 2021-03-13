@@ -1,0 +1,18 @@
+nav{
+    background-color: rgb(77, 120, 126);
+    font-family: cursive;
+    font-weight: bold;
+    color: gray;  
+}
+
+.row{
+   color: rgb(77, 120, 126);
+  
+   
+}
+
+#first_name2{
+    color: rgb(77, 120, 126);
+    text-align: center;
+    border: solid black 2px;
+}
