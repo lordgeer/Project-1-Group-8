@@ -6,7 +6,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Document</title>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-            <link rel="stylesheet" href="style.css">
+            <link rel="stylesheet" href="assets/style.css">
         </head>
         <nav>
           <div class="nav-wrapper">
@@ -21,11 +21,11 @@
                 </div>
               </div>  
             <div class="input-field col s12">
-             <select>
+             <select multiple>
                 <option value="" disabled selected>Choose your option</option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                <option id="opt1" value="1">Associated Press</option>
+                <option value="2">BBC World News</option>
+                <option value="3">New York Times</option>
              </select>
                 <label>News Sourses </label>
               </div>
@@ -33,36 +33,11 @@
                 <i class="material-icons right"></i>
               </button>
               <div class="container"> 
-                <form action="#">                 
-                <h4>Your Preferences</h4>                 
-                    <p>                 
-                      <label for="chk-demo1">                 
-                        <input type="checkbox" id="chk-demo1"/>                 
-                        <span>Asssociated Press</span>                 
-                      </label>                 
-                    </p>                 
-                    <p>                 
-                      <label for="chk-demo2">                 
-                        <input type="checkbox" id="chk-demo2" checked="checked" />                 
-                        <span>BBC World News</span>                 
-                      </label>                 
-                    </p>                 
-                    <p>                 
-                      <label for="chk-demo3">                 
-                        <input type="checkbox" id="chk-demo3" checked="checked" />                 
-                        <span>New York Times</span>                 
-                      </label>                 
-                    </p>                 
-                    <p>                 
-                      <label for="chk-demo4">                 
-                        <input type="checkbox" id="chk-demo4" />                 
-                        <span>Forbes</span>                 
-                      </label>                 
-                    </p>                                 
+                <form action="#">                                
                   </form>                 
                 </div>
               
-              <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
              <script src="assets/script.js"></script> 
         </body>
         </html>

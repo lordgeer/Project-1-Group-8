@@ -20,6 +20,9 @@ btnEl.addEventListener("click", function(event) {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    // var instances = M.Modal.init(elems, options);
-});
+    var elems = document.querySelectorAll('select');
+    var options = document.querySelector("#opt1");
+    var instances = M.FormSelect.init(elems, options);
+
+
+  });
