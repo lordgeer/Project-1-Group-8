@@ -1,10 +1,8 @@
-
-
-
-
+var instance = M.FormSelect.getInstance(elem);
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, options);
-  });
+  var elems = document.querySelectorAll('select');
+  var instances = M.FormSelect.init(elems, options);
+});
+instance.getSelectedValues();
