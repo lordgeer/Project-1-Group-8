@@ -1,12 +1,21 @@
+var btnEl = document.querySelector("#btn");
+var inputEl = document.querySelector("#keyword");
+
 var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
 
-var s = "http://api.mediastack.com/v1/news&?access_key=" + key;
+btnEl.addEventListener("click", function(event) {
+    event.preventDefault();;
 
-fetch(s,  {
-})
-    .then(function (response) {
-    return response.json();
+    var keyword = inputEl.value;
+    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword;
+
+    fetch(s,  {
     })
-    .then(function (data) {
-        console.log(data);
+        .then(function (response) {
+        return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+    });
+
 });
