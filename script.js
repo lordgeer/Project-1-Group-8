@@ -10,3 +10,12 @@ fetch(s,  {
     .then(function (data) {
         console.log(data);
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, options);
+  });
+
