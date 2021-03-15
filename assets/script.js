@@ -6,14 +6,16 @@ var artDescrEl = document.querySelector(".articleDescr");
 var linkEl = document.querySelector("#link");
 
 var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
+var guardianApi = `9d659950-2409-48a5-b628-08c9ecdb8d45`
 
 var info;
+
 
 btnEl.addEventListener("click", function(event) {
     event.preventDefault();;
 
     var keyword = inputEl.value;
-    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en";
+    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en" + "&sources = " + ;
 
     fetch(s,  {
     })
