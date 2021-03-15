@@ -33,6 +33,9 @@ btnEl.addEventListener("click", function(event) {
           spanEl.className = "card-title";
           spanEl.innerHTML = data.data[i].title;
 
+          var sourceEl = document.createElement("h6");
+          sourceEl.textContent = data.data[i].source;
+
           var artDescr = document.createElement("p");
           artDescr.innerHTML = data.data[i].description;
           
@@ -41,7 +44,7 @@ btnEl.addEventListener("click", function(event) {
           linkEl.href = data.data[i].url;
           linkEl.target = "_blank";  
 
-          card2El.append(spanEl, artDescr, linkEl);
+          card2El.append(spanEl, sourceEl, artDescr, linkEl);
           card1El.append(card2El);
           col.append(card1El);
           row.append(col);
