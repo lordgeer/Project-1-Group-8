@@ -1,9 +1,6 @@
 var btnEl = document.querySelector("#btn");
 var inputEl = document.querySelector("#keyword");
-var cardEl = document.querySelector(".row");
-var cardTitleEl = document.querySelector(".card-title");
-var artDescrEl = document.querySelector(".articleDescr");
-var linkEl = document.querySelector("#link");
+var bodyEl = document.querySelector("body");
 
 var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
 var guardianApi = `9d659950-2409-48a5-b628-08c9ecdb8d45`
@@ -24,13 +21,37 @@ btnEl.addEventListener("click", function(event) {
     })
     .then(function (data) {
         console.log(data);   
+        for (var i = 0; i < 10; ++i) {
+          var row = document.createElement("div");
+          row.className = "row";
+          var col = document.createElement("div");
+          col.className = "col s12 m6";
+          var card1El = document.createElement("div");
+          card1El.className = "card blue-grey darken-1";
+          var card2El = document.createElement("div");
+          card2El.className = "card-content white-text";
 
-        cardEl.style.display = "block";
+          var spanEl = document.createElement("span");
+          spanEl.className = "card-title";
+          spanEl.innerHTML = data.data[i].title;
 
-        cardTitleEl.innerHTML = data.data[24].title;
-        artDescrEl.innerHTML = data.data[24].description;
-        linkEl.textContent = "Link to Article";
-        linkEl.href = data.data[24].url;  
+          var sourceEl = document.createElement("h6");
+          sourceEl.textContent = data.data[i].source;
+
+          var artDescr = document.createElement("p");
+          artDescr.innerHTML = data.data[i].description;
+          
+          var linkEl = document.createElement("a");
+          linkEl.textContent = "Link to Article";
+          linkEl.href = data.data[i].url;
+          linkEl.target = "_blank";  
+
+          card2El.append(spanEl, sourceEl, artDescr, linkEl);
+          card1El.append(card2El);
+          col.append(card1El);
+          row.append(col);
+          bodyEl.append(row);
+        }
     });
 });
 
