@@ -34,20 +34,20 @@ document.addEventListener('DOMContentLoaded', function() {
     for (var i = 0; i < keyword.length; i++) {
       var sourceName = keyword[i].owner.login + '/' + keyword[i].name;
   
-      var repoEl = document.createElement('a');
-      repoEl.classList = 'list-item flex-row justify-space-between align-center';
-      repoEl.setAttribute(keywordText + sourceName);
+      var newsEl = document.createElement('a');
+      newsEl.classList = 'list-item flex-row justify-space-between align-center';
+      newsEl.setAttribute(keywordText + sourceName);
   
       var titleEl = document.createElement('span');
       titleEl.textContent = sourceName;
   
-      repoEl.appendChild(titleEl);
+      newsEl.appendChild(titleEl);
   
       var statusEl = document.createElement('span');
       statusEl.classList = 'flex-row align-center';
   
-      repoEl.appendChild(statusEl);
+      newsEl.appendChild(statusEl);
   
-      repoContainerEl.appendChild(repoEl);
+      resultsContainerEl.appendChild(newsEl);
     }
   };
