@@ -32,9 +32,35 @@ btnEl.addEventListener("click", function(event) {
     });
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var options = document.querySelector("#opt1");
     var instances = M.FormSelect.init(elems, options);
   });
+
+  var displayResults = function (keyword, searchTerm) {
+    
+    searchTerm.textContent = searchTerm;
+  
+    for (var i = 0; i < keyword.length; i++) {
+      var sourceName = keyword[i].owner.login + '/' + keyword[i].name;
+  
+      var repoEl = document.createElement('a');
+      repoEl.classList = 'list-item flex-row justify-space-between align-center';
+      repoEl.setAttribute(keywordText + sourceName);
+  
+      var titleEl = document.createElement('span');
+      titleEl.textContent = sourceName;
+  
+      repoEl.appendChild(titleEl);
+  
+      var statusEl = document.createElement('span');
+      statusEl.classList = 'flex-row align-center';
+  
+      repoEl.appendChild(statusEl);
+  
+      repoContainerEl.appendChild(repoEl);
+    }
+  };
 
