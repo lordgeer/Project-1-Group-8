@@ -3,10 +3,11 @@ var inputEl = document.querySelector("#keyword");
 var bodyEl = document.querySelector("body");
 // mediastack api key
 var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
+
 btnEl.addEventListener("click", function(event) {
     event.preventDefault();;
     var keyword = inputEl.value;
-    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en";
+    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en" + "&sources=";
     fetch(s,  {
     })
     .then(function (response) {
@@ -48,7 +49,8 @@ btnEl.addEventListener("click", function(event) {
     elems.onchange = selectThem;
     var instances = M.FormSelect.init(elems);
     function selectThem() {
-        var selectedOne = instances.getSelectedValues();
-        console.log(selectedOne);
+        var sources = instances.getSelectedValues();
+        console.log(sources);
+        console.log(elems)
     }
 });
