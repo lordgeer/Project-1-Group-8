@@ -27,8 +27,7 @@ btnEl.addEventListener("click", function(event) {
     var s = "";
     if (x[0] === "") 
     {
-      // need to update url with keywords
-      s = "https://content.guardianapis.com/search?page=2&q=debate&api-key=test";
+      s = "https://content.guardianapis.com/search?page=2&q="+ keyword + "&api-key=test";
 
       fetch(s,  {
       })
@@ -50,6 +49,10 @@ btnEl.addEventListener("click", function(event) {
             var spanEl = document.createElement("span");
             spanEl.className = "card-title";
             spanEl.innerHTML = data.response.results[i].webTitle;
+
+            var typeEl = document.createElement("h6");
+            typeEl.textContent = "Article Type: " + data.response.results[i].sectionName;
+            typeEl.textContent.toUpperCase();
             
             var linkEl = document.createElement("a");
             linkEl.textContent = "Link to Article";
@@ -57,12 +60,11 @@ btnEl.addEventListener("click", function(event) {
             linkEl.href = data.response.results[i].webUrl;
             linkEl.target = "_blank";  
 
-            card2El.append(spanEl, linkEl);
+            card2El.append(spanEl, typeEl, linkEl);
             card1El.append(card2El);
             col.append(card1El);
             row.append(col);
             bodyEl.append(row);
-
           }
       });
     }
@@ -93,7 +95,8 @@ btnEl.addEventListener("click", function(event) {
             spanEl.innerHTML = data.data[i].title;
 
             var sourceEl = document.createElement("h6");
-            sourceEl.textContent = data.data[i].source;
+            sourceEl.textContent = "Source: " + data.data[i].source;
+            sourceEl.textContent.toUpperCase();
 
             var artDescr = document.createElement("p");
             artDescr.innerHTML = data.data[i].description;
@@ -109,7 +112,6 @@ btnEl.addEventListener("click", function(event) {
             row.append(col);
             bodyEl.append(row);
           }
-    
       });
     } 
 });
