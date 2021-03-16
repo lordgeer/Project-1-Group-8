@@ -27,6 +27,7 @@ btnEl.addEventListener("click", function(event) {
     var s = "";
     if (x[0] === "") 
     {
+      // need to update url with keywords
       s = "https://content.guardianapis.com/search?page=2&q=debate&api-key=test";
 
       fetch(s,  {
