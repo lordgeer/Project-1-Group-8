@@ -147,7 +147,7 @@ btnEl.addEventListener("click", function(event) {
             var isSame = false;
             // loop through stores article titles
             for (var j = 0; j < storeTitle.length; ++j) {
-              if (data.data[i].title == test[j]) {
+              if (data.data[i].title == storeTitle[j]) {
                 // if article title matches one that's 
                 // already stored, set the flag to true
                 isSame = true;
