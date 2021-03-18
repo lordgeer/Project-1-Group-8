@@ -126,7 +126,7 @@ btnEl.addEventListener("click", function(event) {
       // if user selects source from modal, set api url to mediastack
       var storeSourcesStr = storeSources.join(",");
       console.log("str1: " + storeSourcesStr);
-      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en" + "&sort=popularity";
+      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
       fetch(apiUrl,  {
@@ -160,10 +160,6 @@ btnEl.addEventListener("click", function(event) {
             sourceEl.textContent = "Source: " + data.data[i].source;
             sourceEl.textContent.toUpperCase();
 
-            // create H6 element for displaying article author
-            var authorEl = document.createElement("h6");
-            authorEl.textContent = "Source: " + data.data[i].author;
-
             // create P element for displaying article description
             var artDescr = document.createElement("p");
             artDescr.innerHTML = data.data[i].description;
@@ -176,7 +172,7 @@ btnEl.addEventListener("click", function(event) {
             linkEl.target = "_blank";  
 
             // append all elements within the proper div
-            card2El.append(spanEl, sourceEl, authorEl, artDescr, linkEl);
+            card2El.append(spanEl, sourceEl, artDescr, linkEl);
             card1El.append(card2El);
             col.append(card1El);
             row.append(col);
