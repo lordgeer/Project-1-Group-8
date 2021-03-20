@@ -12,10 +12,11 @@ var key = "afb46eb9598ac8e446e34471c37909f3";
 // guardian api key
 var guardianApi = "9d659950-2409-48a5-b628-08c9ecdb8d45";
 
-// array to store user options from modal
+// array to store user selected options from modal
 var storeSources = [];
 
-// array to store article titles to check for duplicates
+// array to store article titles 
+// to check for duplicate articles
 var storeTitle = [];
 
 // event listener for user selected sources from the modal
@@ -30,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
 btnEl.addEventListener("click", function(event) {
     event.preventDefault();
 
+    // if no selections are present in the modal,
+    // clear the localStorage
     for (var i = 1; i < elems.length; ++i) {
       if (elems[i].selected == false) {
         localStorage.clear();
@@ -50,7 +53,8 @@ btnEl.addEventListener("click", function(event) {
 
     // create an empty string used for creating api url
     var apiUrl = "";
-    // check if the user did not select any sources from the modal, fetch from guardian api
+    // check if the user did NOT select any sources from the modal, 
+    // if true fetch from guardian api
     if ((hasSelected.length == 1 && hasSelected == 0) || hasSelected.length == 0)
     {
       // set string to guardian api url
@@ -66,12 +70,11 @@ btnEl.addEventListener("click", function(event) {
           // create var for length of results from the guardian, 
           // and if results are greater than 10, set it to 10  
           var guardianListLength = data.response.results.length;
-          if (guardianListLength > 10) {
-            guardianListLength =  10;
-          }
+        
           // loop through guardian response results
           for (var i = 0; i < guardianListLength; ++i) {
-            // dynamic html elements
+
+            // create dynamic html elements
             // create div element and set its class
             var row = document.createElement("div");
             row.className = "row";
@@ -111,7 +114,6 @@ btnEl.addEventListener("click", function(event) {
             cardContainer.append(row);
           }
       });
-
     }
     else 
     {
@@ -220,20 +222,25 @@ btnEl.addEventListener("click", function(event) {
 
 // initialize funtion to get data from local storage
 function init() {
+  // get values from local storage and 
+  // put them into the storeSOurces array
   var storedNewsSources = JSON.parse(localStorage.getItem("newsSources"));
   if (storedNewsSources !== null) {
     storeSources = storedNewsSources;
   }
 
-  var index = 0;
+  // loop through modal elements starting at index 1
   for (var i = 1; i < elems.length; ++i) {
+    // loop through storeSources array
       for (var j = 0; j < storeSources.length; ++j) {
     
+        // if values stored in local storage match
+        // the value of the modal select option,
+        // set that select option to be pre-selected
         if (elems[i].value == storeSources[j]) {
           elems[i].selected = true;
         }
       }
-      ++index;
   }
 }
 
