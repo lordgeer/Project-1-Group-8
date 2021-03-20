@@ -136,7 +136,13 @@ btnEl.addEventListener("click", function(event) {
       var storeSourcesStr = storeSources.join(",");
 
       console.log("str1: " + storeSourcesStr);
-      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
+
+      if (location.protocol === "http:") {
+        apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
+      }
+      else {
+        apiUrl = "https://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
+      }
 
       // fetch api url
       fetch(apiUrl,  {
