@@ -7,7 +7,7 @@ var instances = M.FormSelect.init(elems);
 var cardContainer = document.createElement("div");
 
 // mediastack api key
-var key = "e719427a4fbbb202e3d0acd1d55f1a41";
+var key = "afb46eb9598ac8e446e34471c37909f3";
 
 // guardian api key
 var guardianApi = "9d659950-2409-48a5-b628-08c9ecdb8d45";
@@ -29,6 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
 // search button click event listener
 btnEl.addEventListener("click", function(event) {
     event.preventDefault();
+
+    for (var i = 1; i < elems.length; ++i) {
+      if (elems[i].selected == false) {
+        localStorage.clear();
+      }
+    }    
 
     // clear contents of card container 
     // each time the button is pressed so that
@@ -56,8 +62,7 @@ btnEl.addEventListener("click", function(event) {
       .then(function (response) {
           return response.json();
       })
-      .then(function (data) {
-          console.log(data);  
+      .then(function (data) { 
           // create var for length of results from the guardian, 
           // and if results are greater than 10, set it to 10  
           var guardianListLength = data.response.results.length;
@@ -113,7 +118,7 @@ btnEl.addEventListener("click", function(event) {
       // if user makes slection from modal
       // clear the array and local storage
       storeSources = [];
-      localStorage.clear();
+
       // find which options the user has selected 
       // from the modal, and store the info in local  storage
       for (var i = 0; i < hasSelected.length; ++i) {
@@ -218,6 +223,17 @@ function init() {
   var storedNewsSources = JSON.parse(localStorage.getItem("newsSources"));
   if (storedNewsSources !== null) {
     storeSources = storedNewsSources;
+  }
+
+  var index = 0;
+  for (var i = 1; i < elems.length; ++i) {
+      for (var j = 0; j < storeSources.length; ++j) {
+    
+        if (elems[i].value == storeSources[j]) {
+          elems[i].selected = true;
+        }
+      }
+      ++index;
   }
 }
 
