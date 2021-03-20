@@ -123,14 +123,13 @@ btnEl.addEventListener("click", function(event) {
           }
         } 
       }
-
       // store array of selected sources in local storage
       localStorage.setItem("newsSources", JSON.stringify(storeSources));
       // if user selects source from modal, set api url to mediastack
       var storeSourcesStr = storeSources.join(",");
 
-      //  set api url
-      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&limit=25" + "&languages=en";
+      console.log("str1: " + storeSourcesStr);
+      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
       fetch(apiUrl,  {
