@@ -7,13 +7,16 @@ var instances = M.FormSelect.init(elems);
 var cardContainer = document.createElement("div");
 
 // mediastack api key
-var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
+var key = "e719427a4fbbb202e3d0acd1d55f1a41";
 
 // guardian api key
 var guardianApi = "9d659950-2409-48a5-b628-08c9ecdb8d45";
 
 // array to store user options from modal
 var storeSources = [];
+
+// array to store article titles to check for duplicates
+var storeTitle = [];
 
 // event listener for user selected sources from the modal
 document.addEventListener('DOMContentLoaded', function () {
@@ -41,7 +44,6 @@ btnEl.addEventListener("click", function(event) {
 
     // create an empty string used for creating api url
     var apiUrl = "";
-    console.log("length: " + hasSelected.length + "\nsel: " + hasSelected);
     // check if the user did not select any sources from the modal, fetch from guardian api
     if ((hasSelected.length == 1 && hasSelected == 0) || hasSelected.length == 0)
     {
@@ -81,8 +83,8 @@ btnEl.addEventListener("click", function(event) {
             // create span element for displaying article title 
             var spanEl = document.createElement("span");
             spanEl.className = "card-title";
-            spanEl.innerHTML = data.response.results[i].webTitle;
-
+            spanEl.textContent = data.response.results[i].webTitle;
+            
             // create H6 element for displaying article type/genre
             var typeEl = document.createElement("h6");
             typeEl.textContent = "Article Type: " + data.response.results[i].sectionName;
@@ -104,6 +106,7 @@ btnEl.addEventListener("click", function(event) {
             cardContainer.append(row);
           }
       });
+
     }
     else 
     {
@@ -116,16 +119,17 @@ btnEl.addEventListener("click", function(event) {
       for (var i = 0; i < hasSelected.length; ++i) {
         for (var j = 0; j < getSources.length; ++j) {
           if (hasSelected[i] == getSources[j].value) {
-            console.log("selected: " + hasSelected[i]);
-            storeSources.push(getSources[j].innerHTML);
+            storeSources.push(getSources[j].value);
           }
         } 
       }
       // store array of selected sources in local storage
       localStorage.setItem("newsSources", JSON.stringify(storeSources));
-
       // if user selects source from modal, set api url to mediastack
-      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en";
+      var storeSourcesStr = storeSources.join(",");
+
+      console.log("str1: " + storeSourcesStr);
+      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
       fetch(apiUrl,  {
@@ -134,7 +138,28 @@ btnEl.addEventListener("click", function(event) {
           return response.json();
       })
       .then(function (data) {
-          for (var i = 0; i < 10; ++i) {
+            console.log(data);
+
+            for (var i = 0; i < data.data.length; ++i) {
+            
+            // boolean variable
+            var isSame = false;
+            // loop through stores article titles
+            for (var j = 0; j < storeTitle.length; ++j) {
+              if (data.data[i].title == storeTitle[j]) {
+                // if article title matches one that's 
+                // already stored, set the flag to true
+                isSame = true;
+                break;
+              }
+            }
+
+            // if isSame flag is set to true, 
+            // continue to next iteration
+            if (isSame) {
+              continue;
+            }
+
             // create dynamic html elements
             // create div and set its class
             var row = document.createElement("div");
@@ -152,16 +177,15 @@ btnEl.addEventListener("click", function(event) {
             // create span element for displaying article title
             var spanEl = document.createElement("span");
             spanEl.className = "card-title";
-            spanEl.innerHTML = data.data[i].title;
+            spanEl.textContent = data.data[i].title;
+
+            // if article is unique, store in array
+            storeTitle.push(data.data[i].title);
 
             // create H6 element for displaying article type/genre
             var sourceEl = document.createElement("h6");
             sourceEl.textContent = "Source: " + data.data[i].source;
             sourceEl.textContent.toUpperCase();
-
-            // create H6 element for displaying article author
-            var authorEl = document.createElement("h6");
-            authorEl.textContent = "Source: " + data.data[i].author;
 
             // create P element for displaying article description
             var artDescr = document.createElement("p");
@@ -175,7 +199,7 @@ btnEl.addEventListener("click", function(event) {
             linkEl.target = "_blank";  
 
             // append all elements within the proper div
-            card2El.append(spanEl, sourceEl, authorEl, artDescr, linkEl);
+            card2El.append(spanEl, sourceEl, artDescr, linkEl);
             card1El.append(card2El);
             col.append(card1El);
             row.append(col);
@@ -196,57 +220,4 @@ function init() {
   }
 }
 
-// call init
 init();
-=======
-// mediastack api key
-var key = "86a96f87ec4dbad68a9ea4356c58fe4a";
-btnEl.addEventListener("click", function(event) {
-    event.preventDefault();;
-    var keyword = inputEl.value;
-    var s = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&languages=en";
-    fetch(s,  {
-    })
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);   
-        for (var i = 0; i < 10; ++i) {
-          var row = document.createElement("div");
-          row.className = "row";
-          var col = document.createElement("div");
-          col.className = "col s12 m6";
-          var card1El = document.createElement("div");
-          card1El.className = "card blue-grey darken-1";
-          var card2El = document.createElement("div");
-          card2El.className = "card-content white-text";
-          var spanEl = document.createElement("span");
-          spanEl.className = "card-title";
-          spanEl.innerHTML = data.data[i].title;
-          var sourceEl = document.createElement("h6");
-          sourceEl.textContent = data.data[i].source;
-          var artDescr = document.createElement("p");
-          artDescr.innerHTML = data.data[i].description;
-          var linkEl = document.createElement("a");
-          linkEl.textContent = "Link to Article";
-          linkEl.href = data.data[i].url;
-          linkEl.target = "_blank";  
-          card2El.append(spanEl, sourceEl, artDescr, linkEl);
-          card1El.append(card2El);
-          col.append(card1El);
-          row.append(col);
-          bodyEl.append(row);
-        }
-    });
-});
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelector('select');
-    elems.onchange = selectThem;
-    var instances = M.FormSelect.init(elems);
-    function selectThem() {
-        var selectedOne = instances.getSelectedValues();
-        console.log(selectedOne);
-    }
-});
