@@ -1,17 +1,57 @@
 nav{
     background-color: rgb(77, 120, 126);
-    font-family: cursive;
+    font-family: Tangerine;
     font-weight: bold;
-    color: gray;  
+    color: gray;
+    text-shadow: 4px 4px 4px rgb(77, 76, 76);  
+   
 }
 
-.row{
-   color: rgb(77, 120, 126);
-
+.row{   
+    
+   
+   
 }
 
+#keyword{
+    text-align: center;
+    border: solid rgb(77, 120, 126) 2px;
+    padding-left: 50px;
+    padding-right: 50px;
+    box-shadow: 4px 4px 4px 2px rgb(77, 120, 126);
+    
+}
 #first_name2{
     color: rgb(77, 120, 126);
     text-align: center;
     border: solid black 2px;
+    flex: 100%;
+}
+#title{
+    top: -45;
+    font-family: Tangerine;
+    color: rgb(77, 120, 126) ;
+    font-size: xx-large;
+    margin-left: 320px;
+    text-shadow: 1px 1px lightgray;
+    flex: 100%;
+}
+.test{
+    margin-left: 100px;
+}
+.btn{
+    font-family:Redressed; 
+    background-color: rgb(77, 120, 126);
+    text-shadow: 1px 1px 1px gray;
+    margin-left: 343px;
+    box-shadow: 2px 2px 2px lightgray;
+}
+.subtitle{
+   margin-left: 100px;
+   font-family:Redressed; 
+   color: black;
+   text-shadow: 4px 4px lightgray;
+}
+.col s12 m6{
+    border: solid black 2px;  
 }

@@ -7,6 +7,7 @@ var instances = M.FormSelect.init(elems);
 var cardContainer = document.createElement("div");
 
 // mediastack api key
+
 var key = "afb46eb9598ac8e446e34471c37909f3";
 
 // guardian api key
@@ -53,6 +54,7 @@ btnEl.addEventListener("click", function(event) {
 
     // create an empty string used for creating api url
     var apiUrl = "";
+
     // check if the user did NOT select any sources from the modal, 
     // if true fetch from guardian api
     if ((hasSelected.length == 1 && hasSelected == 0) || hasSelected.length == 0)
@@ -114,6 +116,7 @@ btnEl.addEventListener("click", function(event) {
             cardContainer.append(row);
           }
       });
+
     }
     else 
     {
@@ -137,6 +140,7 @@ btnEl.addEventListener("click", function(event) {
 
       console.log("str1: " + storeSourcesStr);
 
+
       apiUrl = "https://cors-anywhere.herokuapp.com/http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
@@ -146,10 +150,12 @@ btnEl.addEventListener("click", function(event) {
           return response.json();
       })
       .then(function (data) {
+
           console.log(data);
 
           // loop thorugh api response data
           for (var i = 0; i < data.data.length; ++i) {
+
 
             // boolean variable
             var isSame = false;
@@ -162,6 +168,7 @@ btnEl.addEventListener("click", function(event) {
                 break;
               }
             }
+
             
             // if isSame flag is set to true, 
             // continue to next iteration
@@ -230,6 +237,8 @@ function init() {
     storeSources = storedNewsSources;
   }
 
+
+
   // loop through modal elements starting at index 1
   for (var i = 1; i < elems.length; ++i) {
     // loop through storeSources array
@@ -246,3 +255,4 @@ function init() {
 }
 
 init();
+
