@@ -137,12 +137,7 @@ btnEl.addEventListener("click", function(event) {
 
       console.log("str1: " + storeSourcesStr);
 
-      if (location.protocol === "http:") {
-        apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
-      }
-      else {
-        apiUrl = "https://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
-      }
+      apiUrl = "https://cors-anywhere.herokuapp.com/http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
       fetch(apiUrl,  {
