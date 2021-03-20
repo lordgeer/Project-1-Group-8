@@ -139,10 +139,11 @@ btnEl.addEventListener("click", function(event) {
           return response.json();
       })
       .then(function (data) {
-            console.log(data);
+          console.log(data);
 
-            for (var i = 0; i < data.data.length; ++i) {
-            
+          // loop thorugh api response data
+          for (var i = 0; i < data.data.length; ++i) {
+
             // boolean variable
             var isSame = false;
             // loop through stores article titles
@@ -154,7 +155,7 @@ btnEl.addEventListener("click", function(event) {
                 break;
               }
             }
-
+            
             // if isSame flag is set to true, 
             // continue to next iteration
             if (isSame) {
@@ -195,7 +196,7 @@ btnEl.addEventListener("click", function(event) {
             // create anchor element for link to article
             var linkEl = document.createElement("a");
             linkEl.textContent = "Link to Article";
-           // set anchor element href to url of article
+          // set anchor element href to url of article
             linkEl.href = data.data[i].url;
             linkEl.target = "_blank";  
 
@@ -206,7 +207,7 @@ btnEl.addEventListener("click", function(event) {
             row.append(col);
             // append card to the cardContainer
             cardContainer.append(row);
-          }
+        }
       });
     } 
     // append cardContainer to the body
