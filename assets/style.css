@@ -2,17 +2,12 @@ nav{
     background-color: rgb(77, 120, 126);
     font-family: Tangerine;
     font-weight: bold;
-    color: gray;
-    text-shadow: 4px 4px 4px rgb(77, 76, 76);  
-   
-}
-
-.row{   
+    color: rgb(218, 213, 213);
+    text-shadow: 5px 5px 5px rgb(77, 77, 77); 
+    height: 80px;
     
-   
-   
-}
-
+    
+} 
 #keyword{
     text-align: center;
     border: solid rgb(77, 120, 126) 2px;
@@ -25,33 +20,34 @@ nav{
     color: rgb(77, 120, 126);
     text-align: center;
     border: solid black 2px;
-    flex: 100%;
+    
 }
 #title{
-    top: -45;
+    top: -60;
     font-family: Tangerine;
     color: rgb(77, 120, 126) ;
-    font-size: xx-large;
-    margin-left: 320px;
+    font-size: 4vw;
+    margin-left: 0px
     text-shadow: 1px 1px lightgray;
-    flex: 100%;
+     
 }
 .test{
-    margin-left: 100px;
+    
 }
 .btn{
     font-family:Redressed; 
     background-color: rgb(77, 120, 126);
     text-shadow: 1px 1px 1px gray;
-    margin-left: 343px;
     box-shadow: 2px 2px 2px lightgray;
+    width: 100%;
 }
 .subtitle{
-   margin-left: 100px;
+   text-align: center;
    font-family:Redressed; 
-   color: black;
-   text-shadow: 4px 4px lightgray;
+   color: rgb(34, 44, 51);
+   text-shadow: 4px 4px rgb(167, 165, 165);
+   padding-top: 50px;
+   padding-bottom: 50px;
 }
-.col s12 m6{
-    border: solid black 2px;  
-}
+
+    
