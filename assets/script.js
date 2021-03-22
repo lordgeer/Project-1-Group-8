@@ -7,15 +7,17 @@ var instances = M.FormSelect.init(elems);
 var cardContainer = document.createElement("div");
 
 // mediastack api key
-var key = "e719427a4fbbb202e3d0acd1d55f1a41";
+
+var key = "afb46eb9598ac8e446e34471c37909f3";
 
 // guardian api key
 var guardianApi = "9d659950-2409-48a5-b628-08c9ecdb8d45";
 
-// array to store user options from modal
+// array to store user selected options from modal
 var storeSources = [];
 
-// array to store article titles to check for duplicates
+// array to store article titles 
+// to check for duplicate articles
 var storeTitle = [];
 
 // event listener for user selected sources from the modal
@@ -29,6 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
 // search button click event listener
 btnEl.addEventListener("click", function(event) {
     event.preventDefault();
+
+    // if no selections are present in the modal,
+    // clear the localStorage
+    for (var i = 1; i < elems.length; ++i) {
+      if (elems[i].selected == false) {
+        localStorage.clear();
+      }
+    }    
 
     // clear contents of card container 
     // each time the button is pressed so that
@@ -44,7 +54,9 @@ btnEl.addEventListener("click", function(event) {
 
     // create an empty string used for creating api url
     var apiUrl = "";
-    // check if the user did not select any sources from the modal, fetch from guardian api
+
+    // check if the user did NOT select any sources from the modal, 
+    // if true fetch from guardian api
     if ((hasSelected.length == 1 && hasSelected == 0) || hasSelected.length == 0)
     {
       // set string to guardian api url
@@ -56,17 +68,15 @@ btnEl.addEventListener("click", function(event) {
       .then(function (response) {
           return response.json();
       })
-      .then(function (data) {
-          console.log(data);  
+      .then(function (data) { 
           // create var for length of results from the guardian, 
           // and if results are greater than 10, set it to 10  
           var guardianListLength = data.response.results.length;
-          if (guardianListLength > 10) {
-            guardianListLength =  10;
-          }
+        
           // loop through guardian response results
           for (var i = 0; i < guardianListLength; ++i) {
-            // dynamic html elements
+
+            // create dynamic html elements
             // create div element and set its class
             var row = document.createElement("div");
             row.className = "row";
@@ -113,7 +123,7 @@ btnEl.addEventListener("click", function(event) {
       // if user makes slection from modal
       // clear the array and local storage
       storeSources = [];
-      localStorage.clear();
+
       // find which options the user has selected 
       // from the modal, and store the info in local  storage
       for (var i = 0; i < hasSelected.length; ++i) {
@@ -129,7 +139,9 @@ btnEl.addEventListener("click", function(event) {
       var storeSourcesStr = storeSources.join(",");
 
       console.log("str1: " + storeSourcesStr);
-      apiUrl = "http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
+
+
+      apiUrl = "https://cors-anywhere.herokuapp.com/http://api.mediastack.com/v1/news?access_key=" + key + "&keywords=" + keyword + "&sources=" + storeSourcesStr + "&languages=en";
 
       // fetch api url
       fetch(apiUrl,  {
@@ -138,10 +150,13 @@ btnEl.addEventListener("click", function(event) {
           return response.json();
       })
       .then(function (data) {
-            console.log(data);
 
-            for (var i = 0; i < data.data.length; ++i) {
-            
+          console.log(data);
+
+          // loop thorugh api response data
+          for (var i = 0; i < data.data.length; ++i) {
+
+
             // boolean variable
             var isSame = false;
             // loop through stores article titles
@@ -154,6 +169,7 @@ btnEl.addEventListener("click", function(event) {
               }
             }
 
+            
             // if isSame flag is set to true, 
             // continue to next iteration
             if (isSame) {
@@ -194,7 +210,7 @@ btnEl.addEventListener("click", function(event) {
             // create anchor element for link to article
             var linkEl = document.createElement("a");
             linkEl.textContent = "Link to Article";
-           // set anchor element href to url of article
+          // set anchor element href to url of article
             linkEl.href = data.data[i].url;
             linkEl.target = "_blank";  
 
@@ -205,7 +221,7 @@ btnEl.addEventListener("click", function(event) {
             row.append(col);
             // append card to the cardContainer
             cardContainer.append(row);
-          }
+        }
       });
     } 
     // append cardContainer to the body
@@ -214,10 +230,29 @@ btnEl.addEventListener("click", function(event) {
 
 // initialize funtion to get data from local storage
 function init() {
+  // get values from local storage and 
+  // put them into the storeSOurces array
   var storedNewsSources = JSON.parse(localStorage.getItem("newsSources"));
   if (storedNewsSources !== null) {
     storeSources = storedNewsSources;
   }
+
+
+
+  // loop through modal elements starting at index 1
+  for (var i = 1; i < elems.length; ++i) {
+    // loop through storeSources array
+      for (var j = 0; j < storeSources.length; ++j) {
+    
+        // if values stored in local storage match
+        // the value of the modal select option,
+        // set that select option to be pre-selected
+        if (elems[i].value == storeSources[j]) {
+          elems[i].selected = true;
+        }
+      }
+  }
 }
 
 init();
+
